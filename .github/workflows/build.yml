@@ -1,5 +1,7 @@
 name: Build Mod
 on: [push]
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -9,6 +11,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Setup Gradle Wrapper
+        run: gradle wrapper --gradle-version 8.1.1
       - name: Build
         run: ./gradlew build
       - uses: actions/upload-artifact@v4
