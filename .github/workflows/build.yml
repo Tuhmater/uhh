@@ -11,7 +11,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Setup Gradle Wrapper
+      - name: Install Gradle 8.1.1
+        run: |
+          wget -q https://services.gradle.org/distributions/gradle-8.1.1-bin.zip
+          unzip -q gradle-8.1.1-bin.zip
+          echo "$PWD/gradle-8.1.1/bin" >> $GITHUB_PATH
+      - name: Setup Wrapper
         run: gradle wrapper --gradle-version 8.1.1
       - name: Build
         run: ./gradlew build
